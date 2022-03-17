@@ -1,6 +1,7 @@
 <?php
 
-use App\Http\Controllers\User\TaskController;
+use App\Http\Controllers\Admin\TaskController as AdminTaskController;
+
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -37,6 +38,10 @@ Route::group(['middleware'=>'auth'], function(){
         Route::get('tasks',                                                 // route will be: /admin/tasks
             [\App\Http\Controllers\Admin\TaskController::class,'index'])
             ->name('tasks.index');                                          // prefix 'admin.' will be added
+
+        Route::get('tasks/{id}', [AdminTaskController::class , 'show'])->name('tasks.show');
+        Route::put('tasks/{id}', [AdminTaskController::class,'update'])->name('tasks.update');
+        Route::delete('tasks/{task}', [AdminTaskController::class,'destroy'])->name('tasks.destroy');
     });
 
     /** Routes for users */

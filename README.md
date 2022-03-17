@@ -14,4 +14,8 @@ In this project we are creating :
  - creating an "class IsAdminMiddleware" to determin if the logged in user is admin or user
  - * adding a function to LoginController to set the redirection to differet pathes for user and admin.
 
-  
+ - creating  different Controllers and views for admin and users 
+ - admin index view with pagination
+ - edit task -> not implemented, but permission can be checked
+ - delete task -> implemented, whitout confirmation
+
