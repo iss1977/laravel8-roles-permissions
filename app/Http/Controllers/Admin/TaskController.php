@@ -17,6 +17,7 @@ class TaskController extends Controller
     /** Show a task for editing */
 
     public function show(Task $task){
+        $this->authorize('tasks-edit');
         return "Editing task - not implemented. If this is displayed, you have the permission to do it.";
     }
 

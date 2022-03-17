@@ -29,7 +29,7 @@
                         <th scope="row">{{$task->id}}</th>
                         <td>{{ $task->task_name }}</td>
                         <td> {{ $task->due_date->format('d-m-Y')  }} </td>
-                        <td> {{ "Days left" }} </td>
+                        <td>  {{ now()->diffInDays($task->due_date) }} </td>
                         <td> {{ $task->user->name }} </td>
                         <td class="d-flex">
                             <a class="btn btn-sm btn-primary me-2" href="{{ route('admin.tasks.show', $task->id) }}">Edit</a>

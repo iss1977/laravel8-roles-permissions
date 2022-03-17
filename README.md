@@ -19,3 +19,9 @@ In this project we are creating :
  - edit task -> not implemented, but permission can be checked
  - delete task -> implemented, whitout confirmation
 
+Note: 
+Using _ $this->authorize('tasks-edit');_ in Controller method can be used without _IsAdminMiddleware_
+to prevent unauthorized access ti controller methods
+Abilities must be resgistred in AuthServiceProvider. Ex: "Gate::define('tasks-edit', fn(User $user) => $user->is_admin);"
+
+
