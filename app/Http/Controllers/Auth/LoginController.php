@@ -37,4 +37,22 @@ class LoginController extends Controller
     {
         $this->middleware('guest')->except('logout');
     }
+
+
+    /**  trait AuthenticatesUsers has a trait RedirectsUsers with a "public function redirectPath()" that will execute this function */
+
+    /**
+    * Note:
+    * If you want to redirect authenticated users on authentication routes by role to different paths,
+    * just edit the "RedirectIfAuthenticated" middleware to redirect by different roles.
+    */
+    public function redirectTo()
+{
+    $for = [
+        1 => 'admin.tasks.index',
+        0  => 'user.tasks.index',
+    ];
+    return $this->redirectTo = route($for[auth()->user()->is_admin]);
+}
+
 }

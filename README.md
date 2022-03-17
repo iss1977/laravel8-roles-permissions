@@ -7,3 +7,11 @@ link to video :  https://youtu.be/kZOgH3-0Bko
 Migration and seeding :
 
 _php artisan migrate:fresh --seed_
+
+In this project we are creating :
+
+ - separate Controller and Views for Admin and User
+ - creating an "class IsAdminMiddleware" to determin if the logged in user is admin or user
+ - * adding a function to LoginController to set the redirection to differet pathes for user and admin.
+
+  

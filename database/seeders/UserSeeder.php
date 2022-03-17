@@ -16,16 +16,35 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
+        // creating one admin to log in for testing
         $admin =
         User::create([
-            'name' => 'ianika',
-            'email' => 'ianika@ianika.com',
+            'name' => 'admin',
+            'email' => 'admin@test.com',
             'password' => bcrypt('12345678'),
             'email_verified_at' => now(),
-            'remember_token' => 'not set'
+            'remember_token' => 'not set',
         ]);
 
-        $admin->tasks()->create(['task_name'=>'Admin task']);
+        $admin->tasks()->create(
+            ['task_name'=>'Admin task',
+            'due_date'=>now()->modify('+1 day')
+        ]);
+
+        // creating one admin to log in for testing
+        $user =
+        User::create([
+            'name' => 'user',
+            'email' => 'user@test.com',
+            'password' => bcrypt('12345678'),
+            'email_verified_at' => now(),
+            'remember_token' => 'not set',
+        ]);
+        $user->tasks()->create(
+            ['task_name'=>'User task',
+            'due_date'=>now()->modify('+1 day')
+        ]);
+
 
         User::factory()
         ->count(20)

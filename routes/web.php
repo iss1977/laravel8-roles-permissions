@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\User\TaskController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,3 +21,33 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+
+/**Info : redirect after login setup is in LoginController */
+
+Route::group(['middleware'=>'auth'], function(){
+
+    /** Routes for Admin */
+    Route::group([
+        'prefix'=>'admin',                                                  // url prefix : /admin/...
+        'middleware'=>'is_admin',                                           // middleware defined in "class IsAdminMiddleware" and registred in "class Kernel extends HttpKernel". Access only for admins in the closure defined routes
+        'as'=> 'admin.'                                                     // just for route names .... ex: route('admin.task.index')
+    ],
+    function(){
+        Route::get('tasks',                                                 // route will be: /admin/tasks
+            [\App\Http\Controllers\Admin\TaskController::class,'index'])
+            ->name('tasks.index');                                          // prefix 'admin.' will be added
+    });
+
+    /** Routes for users */
+    Route::group([
+        'prefix'=>'user',                                                   // url prefix : /user/ ....
+        'as'=>'user.'                                                       // just for route names .... ex: route('user.task.index')
+    ],
+    function(){
+        Route::get('tasks',                                                 // route will be: /user/tasks
+            [\App\Http\Controllers\User\TaskController::class,'index'])
+            ->name('tasks.index');                                           // prefix 'user.' will be added
+    });
+
+});
